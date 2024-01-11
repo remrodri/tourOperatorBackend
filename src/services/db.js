@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 const url = 'mongodb://localhost:27017';
-const dbName = 'pruebas';
+const dbName = 'tourOperatorDB';
 let client;
 const connectDB = async () => {
   try {
@@ -21,5 +21,6 @@ const closeDB = () => {
 module.exports = {
   connectDB,
   getClient,
-  closeDB
+  closeDB,
+  dbName
 };
