@@ -55,10 +55,22 @@ async function updateDB(id, data) {
   }
 }
 
-
+async function removeDB(id) {
+  try {
+    const client = getClient();
+    const db = client.db(dbName);
+    const collection = db.collection('users');
+    const result = await collection.deleteOne({ _id: new ObjectId(id) });
+    return result;
+  } catch (error) {
+    console.log("Error en la eliminacion del usuario", error);
+    throw new Error('Error interno del servidor');
+  }
+}
 module.exports = {
   getAllUsersDB,
   getByIdDB,
   createDB,
   updateDB,
+  removeDB
 };
