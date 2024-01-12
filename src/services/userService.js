@@ -1,7 +1,8 @@
 const {
   getAllUsersDB,
   getByIdDB,
-  createDB
+  createDB,
+  updateDB
 } = require('../repository/userRepository');
 
 async function getAllUsers() {
@@ -19,8 +20,13 @@ async function create(data) {
   return result;
 }
 
+async function update(id, data) {
+  const result = await updateDB(id, data);
+  return result;
+}
 module.exports = {
   getAllUsers,
   getById,
-  create
+  create,
+  update
   };
