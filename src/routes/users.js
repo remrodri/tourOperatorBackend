@@ -4,7 +4,8 @@ var router = express.Router();
 const {
   getAllUsers,
   getById,
-  create
+  create,
+  update
 } = require('../services/userService');
 const { get } = require('.');
 
@@ -23,11 +24,17 @@ router.get('/:id', async function (req,res) {
 })
 
 /* create user*/
-
 router.post('/', async function (req, res) {
   const { body } = req;
   const result = await create(body);
   res.send(result);
 });
 
+/*update user*/
+router.patch('/:id', async function (req, res) {
+  const { params, body } = req;
+  const { id } = params;
+  const result = await update(id, body);
+  res.send(result);
+})
 module.exports = router;
