@@ -28,7 +28,21 @@ async function getByIdDB(id) {
     throw new Error('Error interno del servidor');
   }
 }
+
+async function createDB(data) {
+  try {
+    const client = getClient();
+    const db = client.db(dbName);
+    const collection = db.collection('users');
+    const result = await collection.insertOne(data);
+    return result;
+  } catch (error) {
+    console.error('Error al insertar usuario', error);
+    throw new Error('error interno del servidor');
+  }
+}
 module.exports = {
   getAllUsersDB,
   getByIdDB,
+  createDB,
 };

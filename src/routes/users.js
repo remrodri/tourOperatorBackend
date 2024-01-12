@@ -3,7 +3,8 @@ var router = express.Router();
 
 const {
   getAllUsers,
-  getById
+  getById,
+  create
 } = require('../services/userService');
 const { get } = require('.');
 
@@ -20,5 +21,13 @@ router.get('/:id', async function (req,res) {
   const result = await getById(id);
   res.send(result);
 })
+
+/* create user*/
+
+router.post('/', async function (req, res) {
+  const { body } = req;
+  const result = await create(body);
+  res.send(result);
+});
 
 module.exports = router;
