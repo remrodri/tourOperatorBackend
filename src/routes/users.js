@@ -5,7 +5,8 @@ const {
   getAllUsers,
   getById,
   create,
-  update
+  update,
+  remove
 } = require('../services/userService');
 const { get } = require('.');
 
@@ -35,6 +36,13 @@ router.patch('/:id', async function (req, res) {
   const { params, body } = req;
   const { id } = params;
   const result = await update(id, body);
+  res.send(result);
+})
+
+router.delete('/:id', async function (req, res) {
+  const { params } = req;
+  const { id } = params;
+  const result = await remove(id);
   res.send(result);
 })
 module.exports = router;
