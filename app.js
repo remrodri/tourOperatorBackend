@@ -7,6 +7,7 @@ const { connectDB, closeDB } = require('./src/services/db');
 
 var indexRouter = require("./src/routes/index");
 var usersRouter = require("./src/routes/users");
+var clientsRouter = require('./src/routes/clients');
 
 var app = express();
 
@@ -21,6 +22,7 @@ connectDB().then(() => {
   console.log("MongoDB Connected")
   app.use("/", indexRouter);
   app.use('/users', usersRouter);
+  app.use('/clients', clientsRouter);
 }).catch((err) => console.error(err));
 
   

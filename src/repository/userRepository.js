@@ -21,7 +21,7 @@ async function getByIdDB(id) {
     const db = client.db(dbName);
     const collection = db.collection('users');
     const result = await collection.findOne({ _id: new ObjectId(id) });
-    console.log(result);
+    //console.log(result);
     return result;
   } catch (error) {
     console.error('Error al recuperar usuarios', error);
