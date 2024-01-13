@@ -8,7 +8,13 @@ const {
   update,
   remove
 } = require('../services/userService');
-const { get } = require('.');
+
+const {
+  validateNewUserData,
+  validateUpdateUserData,
+  sanitizeUserData,
+  updateUpdateAt
+} = require('../middlewares/userMidd');
 
 /* GET users listing. */
 router.get('/',async function(req, res, next) {
@@ -25,20 +31,21 @@ router.get('/:id', async function (req,res) {
 })
 
 /* create user*/
-router.post('/', async function (req, res) {
+router.post('/',validateNewUserData,sanitizeUserData, async function (req, res) {
   const { body } = req;
   const result = await create(body);
   res.send(result);
 });
 
 /*update user*/
-router.patch('/:id', async function (req, res) {
+router.patch('/:id',validateUpdateUserData,updateUpdateAt, async function (req, res) {
   const { params, body } = req;
   const { id } = params;
   const result = await update(id, body);
   res.send(result);
 })
 
+/*delete user*/
 router.delete('/:id', async function (req, res) {
   const { params } = req;
   const { id } = params;
