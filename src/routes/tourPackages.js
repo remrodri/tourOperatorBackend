@@ -5,6 +5,7 @@ const {
   createTourPackage,
   updateTourPackage,
   removeTourPackage} = require('../services/tourPackageService');
+const { validateNewTourPackageData } = require('../middlewares/tourPackageMidd');
 var router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -17,7 +18,7 @@ router.get('/:id', async function (req, res) {
   const result = await getTourPackageById(id);
   res.send(result);
 });
-router.post('/', async function (req, res) {
+router.post('/', validateNewTourPackageData, async function (req, res) {
   const { body } = req;
   const result = await createTourPackage(body);
   res.send(result);
