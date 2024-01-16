@@ -8,6 +8,7 @@ const { connectDB, closeDB } = require('./src/services/db');
 var indexRouter = require("./src/routes/index");
 var usersRouter = require("./src/routes/users");
 var clientsRouter = require('./src/routes/clients');
+var tourPackagesRouter = require('./src/routes/tourPackages')
 
 var app = express();
 
@@ -23,6 +24,7 @@ connectDB().then(() => {
   app.use("/", indexRouter);
   app.use('/users', usersRouter);
   app.use('/clients', clientsRouter);
+  app.use('/tourPackages', tourPackagesRouter);
 }).catch((err) => console.error(err));
 
   
