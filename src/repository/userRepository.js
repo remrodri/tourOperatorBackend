@@ -48,7 +48,7 @@ async function updateDB(id, data) {
     const db = client.db(dbName);
     const collection = db.collection('users');
     const result = await collection.updateOne({ _id: new ObjectId(id) }, { $set: data });
-    return result
+    return result;
   } catch (error) {
     console.error('Error en la actualización de datos', error);
     throw new Error('Error interno del servidor');
