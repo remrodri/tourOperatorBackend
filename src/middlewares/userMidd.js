@@ -83,7 +83,7 @@ function validateUpdateUserData(req, res, next) {
   //updateSchema.properties.updateAt.optional = true;
   updateSchema.properties.password.optional = true;
   const resultValidation = inspector.validate(userSchema, body);
-  console.log(body)
+  //console.log(body)
   if (resultValidation.valid) {
     next();
     return;
