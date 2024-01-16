@@ -4,8 +4,14 @@ const {
   getTourPackageById, 
   createTourPackage,
   updateTourPackage,
-  removeTourPackage} = require('../services/tourPackageService');
-const { validateNewTourPackageData } = require('../middlewares/tourPackageMidd');
+  removeTourPackage } = require('../services/tourPackageService');
+  
+const {
+  validateNewTourPackageData,
+  addCreateAtUpdateAtDate,
+  validateUpdateTourPackagaData,
+  updateUpdateAtDate
+} = require('../middlewares/tourPackageMidd');
 var router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -18,12 +24,12 @@ router.get('/:id', async function (req, res) {
   const result = await getTourPackageById(id);
   res.send(result);
 });
-router.post('/', validateNewTourPackageData, async function (req, res) {
+router.post('/', validateNewTourPackageData,addCreateAtUpdateAtDate, async function (req, res) {
   const { body } = req;
   const result = await createTourPackage(body);
   res.send(result);
 });
-router.patch('/:id', async function (req, res) {
+router.patch('/:id', validateUpdateTourPackagaData,updateUpdateAtDate, async function (req, res) {
   const { params, body } = req;
   const { id } = params;
   const result = await updateTourPackage(id, body);
