@@ -6,7 +6,8 @@ const {
   getById,
   create,
   update,
-  remove
+  remove,
+  getUserByParams
 } = require('../services/userService');
 
 const {
@@ -17,7 +18,7 @@ const {
 } = require('../middlewares/userMidd');
 
 /* GET users listing. */
-router.get('/',async function(req, res, next) {
+router.get('/', async function (req, res, next) {
   const result = await getAllUsers();
   res.send(result);
 });
@@ -52,4 +53,22 @@ router.delete('/:id', async function (req, res) {
   const result = await remove(id);
   res.send(result);
 })
+
+router.post('/login', async function (req, res) {
+  try {
+    const { body } = req;
+    console.log('body::: ', JSON.parse(JSON.stringify(body)));
+    const result = await getUserByParams(body);
+    // console.log('result::: ', JSON.parse(JSON.stringify(result)));
+    res.send(result);
+
+  } catch (error) {
+    if (error.message === 'Usuario o contraseña incorrectos') {
+      res.status(401).json({error:'Usuario o contraseña incorrectos'})
+    } else {
+      console.error('Error al procesar la solicitud de login', error);
+      res.status(500). json({ error: 'Error interno del servidor' });
+    }
+  }
+});
 module.exports = router;
