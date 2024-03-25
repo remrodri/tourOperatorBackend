@@ -6,7 +6,15 @@ const getAllRolesDB = async () => {
     const client = getClient();
     const db = client.db(dbName);
     const collection = db.collection('roles');
-    const roles = await collection.find({}).toArray();
+    // const roles = await collection.find({},{projection:{roleName:1,_id:0}}).toArray();
+    const roles = await collection
+      .find({})
+      .project({ roleName: 1, _id: 0 })
+      .toArray();
+    
+    // delete roles.createAt;
+    // delete roles.updateAt;
+    // delete roles._id;
     if (!roles) throw new Error('No Such Role Exists!')
     return roles;
   } catch (error) {
