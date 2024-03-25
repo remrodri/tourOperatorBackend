@@ -1,43 +1,20 @@
-const inspector = require('schema-inspector');
+const inspector = require("schema-inspector");
 
 const userSchema = {
-  type: 'object',
+  type: "object",
   properties: {
-    firstName: { type: 'string', maxLength: 25 },
-    lastName: { type: 'string', maxLength: 25 },
-    userName: { type: 'string', maxLength: 25 },
-    roleName: {
-      type: 'string', maxLength: 13,
-      exec: function (schema, post) {
-        console.log(post)
-        const roles = ['admin', 'guide', 'agent'];
-        if (post !== undefined) { 
-          if (!roles.includes(post)) {
-            this.report("el rol no existe");
-          }
-        }
-      }
-    },
-    qrCode: { type: 'string' },
-    phone: { type: 'string', maxLength: 8 },
-    email: { type: 'string', pattern:'email', maxLength: 25 },
-    status: {
-      type: 'string', maxLength: 8,
-      exec: function (schema, post) {
-        console.log(post)
-        const states = ["active", "inactive"];
-        if (post !==undefined) {
-          if (!states.includes(post)) {
-            this.report(`"${post}" is not a valid status`);
-          }  
-        }
-      }
-    },
-    //createAt: { type: 'string', def:new Date().toDateString() },
-    //updateAt: { type: 'string' },
-    password: {type:'string'}
-  }
-}
+    firstName: { type: "string", maxLength: 25 },
+    lastName: { type: "string", maxLength: 25 },
+    userName: { type: "string", maxLength: 25 },
+    roleId: { type: "string" },
+    qrCode: { type: "string" },
+    phone: { type: "string", maxLength: 8 },
+    email: { type: "string", pattern: "email", maxLength: 25 },
+    status: { type: "boolean" },
+    ci: { type: "string", maxLength: 10 },
+    password: { type: "string" },
+  },
+};
 
 function validateNewUserData(req, res, next) {
   const { body } = req;
@@ -74,11 +51,12 @@ function validateUpdateUserData(req, res, next) {
   updateSchema.properties.firstName.optional = true;
   updateSchema.properties.lastName.optional = true;
   updateSchema.properties.userName.optional = true;
-  updateSchema.properties.roleName.optional = true;
+  updateSchema.properties.roleId.optional = true;
   updateSchema.properties.qrCode.optional = true;
   updateSchema.properties.phone.optional = true;
   updateSchema.properties.email.optional = true;
   updateSchema.properties.status.optional = true;
+  updateSchema.properties.ci.optional = true;
   //updateSchema.properties.createAt.optional = true;
   //updateSchema.properties.updateAt.optional = true;
   updateSchema.properties.password.optional = true;
@@ -94,5 +72,5 @@ module.exports = {
   validateNewUserData,
   validateUpdateUserData,
   sanitizeUserData,
-  updateUpdateAt
-}
+  updateUpdateAt,
+};

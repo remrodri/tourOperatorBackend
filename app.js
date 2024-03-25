@@ -11,6 +11,7 @@ var usersRouter = require("./src/routes/users");
 var clientsRouter = require('./src/routes/clients');
 var tourPackagesRouter = require('./src/routes/tourPackages');
 var tourPackageSalesRouter = require('./src/routes/tourPackageSales');
+var roleRouter = require('./src/routes/roles');
 
 var app = express();
 const corsOptions = {
@@ -35,6 +36,7 @@ connectDB().then(() => {
   app.use('/clients', clientsRouter);
   app.use('/tourPackages', tourPackagesRouter);
   app.use('/tourPackageSales', tourPackageSalesRouter);
+  app.use('/roles', roleRouter);
 }).catch((err) => console.error(err));
 
   
