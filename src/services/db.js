@@ -1,5 +1,8 @@
 const { MongoClient } = require('mongodb');
-const url = 'mongodb://localhost:27017';
+// const url = 'mongodb://localhost:27017';
+const url =
+  "mongodb+srv://tourOperatorDB:mipassword1@cluster0.0fhbk3e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 const dbName = 'tourOperatorDB';
 let client;
 const connectDB = async () => {
