@@ -9,7 +9,7 @@ const getAllRolesDB = async () => {
     // const roles = await collection.find({},{projection:{roleName:1,_id:0}}).toArray();
     const roles = await collection
       .find({})
-      .project({ roleName: 1, _id: 0 })
+      .project({ roleName: 1 })
       .toArray();
     
     // delete roles.createAt;
