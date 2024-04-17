@@ -74,13 +74,34 @@ async function removeDB(id) {
   }
 }
 
-async function getUserByParamsDB(userName, password) {
+// async function getUserByParamsDB(userName, password) {
+//   try {
+//     const client = getClient();
+//     const db = client.db(dbName);
+//     const collection = db.collection("users");
+//     const result = await collection.findOne({
+//       userName: userName,
+//       password: password,
+//     });
+//     if (!result) {
+//       throw new Error("Usuario o contraseña incorrectos");
+//     }
+//     delete result.createAt;
+//     delete result.password;
+//     delete result.updateAt;
+//     return result;
+//   } catch (error) {
+//     console.log("Error al buscar el usuario por parametros", error);
+//     throw error;
+//   }
+// }
+async function getUserByParamsDB(email, password) {
   try {
     const client = getClient();
     const db = client.db(dbName);
     const collection = db.collection("users");
     const result = await collection.findOne({
-      userName: userName,
+      email: email,
       password: password,
     });
     if (!result) {

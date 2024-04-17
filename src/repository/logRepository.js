@@ -1,6 +1,7 @@
 const { ObjectId } = require("mongodb");
 const { getClient, dbName } = require("../services/db");
 
+//obtencion de todos las actividades registradas
 const getAllLogsDB = async () => {
   try {
     const client = getClient();
@@ -9,13 +10,26 @@ const getAllLogsDB = async () => {
     const logs = await collection.find({}).toArray();
     return logs;
   } catch (error) {
-    console.error('Error  getting all clients from DB', error);
+    console.error('Error  getting all logs from DB', error);
+    throw new Error('Server error');
+  }
+}
+//creacion de una actividad
+async function createLogDB(data) { 
+  try {
+    const client = getClient();
+    const db = client.db(dbName);
+    const collection = db.collection('logs');
+    const result = await collection.insertOne(data);
+    return result;
+  } catch (error) {
+    console.log('Error creating log in DB: ', error);
     throw new Error('Server error');
   }
 }
 
+
 async function getLogByIdDB(id) { }
-async function createLogDB(data) { }
 async function  updateLogDB(id, data) {}
 function removeLogDB(id) { }
 module.exports = {

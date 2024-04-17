@@ -34,6 +34,7 @@ router.get('/:id', async function (req,res) {
 /* create user*/
 router.post('/',validateNewUserData,sanitizeUserData, async function (req, res) {
   const { body } = req;
+  console.log('body::: ', body);
   const result = await create(body);
   res.send(result);
 });
@@ -48,10 +49,14 @@ router.patch('/:id',validateUpdateUserData,updateUpdateAt, async function (req, 
 
 /*delete user*/
 router.delete('/:id', async function (req, res) {
-  const { params } = req;
-  const { id } = params;
-  const result = await remove(id);
-  res.send(result);
+  try {
+    const { params } = req;
+    const { id } = params;
+    const result = await remove(id); 
+    res.send(result);
+  } catch (error) {
+    return next(error);
+  }
 })
 
 router.post('/login', async function (req, res) {

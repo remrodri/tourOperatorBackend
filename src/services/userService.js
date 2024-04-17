@@ -34,7 +34,7 @@ async function remove(id) {
 
 async function getUserByParams(params) {
   try {
-    const user = await getUserByParamsDB(params.userName, params.password);
+    const user = await getUserByParamsDB(params.email, params.password);
     // delete user.password;
     // delete user.createAt;
     //delete user._id;
