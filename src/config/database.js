@@ -1,27 +1,19 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 
-const uri =
-  "mongodb+srv://tourOperatorDB:mipassword1@cluster0.0fhbk3e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const dbURI =
+  "mongodb+srv://tourOperatorDB:mipassword1@cluster0.0fhbk3e.mongodb.net/tourOperatorDB";
 
-//opciones de conexion
-// const options = {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// };
 
-//funcion para conectar a la bd
-export async function connectDatabase() {
+
+//conexion a la bd
+const connectDB = async () => {
   try {
-    //instancia del cliente de mongodb
-    const client = new MongoClient(uri);
-    //conectar al servidor de mongodb
-    await client.connect();
-    console.log("Base de datos conectada");
-    //devolver instancia de la bd
-    return client.db('tourOperatorDB');
+    await mongoose.connect(dbURI);
+    console.log("Base de datos conectada correctamente");
   } catch (error) {
-    console.log(`Error en la base de datos ${error}`);
-    throw  error;
+    console.log(`Error al conectar a la base de datos ${error}`);
+    process.exit(1); //finaliza el proceso en caso de error
   }
-}
+};
 
+export default connectDB;

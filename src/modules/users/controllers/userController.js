@@ -1,18 +1,26 @@
-import { ObjectId } from "mongodb";
-import { connectDatabase } from "../../../config/database.js";
+import UserModel from "../models/UserModel.js";
 
-// console.log('Inside the getUserData controller');
-export async function getAllUsers(req, res) { 
-  
-  try {
-    const db = await connectDatabase();
-    const users = await db.collection("users").find().toArray();
-    // console.log('users::: ', users);
+const UserController = {
+  async registerUser(req, res) {
+    try {
+      const newUser = new UserModel(req.body);
+      await newUser.save();
+      res.status(201).json({ message: "usuario registrado con exito" });
+    } catch (error) {
+      console.error("Error al registrar usuaio: ", error);
+      res.status(500).json({ message: "error interno del servidor" });
+    }
+  },
+  async getUsers(req, res) {
+    try {
+      const users = await UserModel.find();
+      console.log('users::: ', users);
+      res.status(200).json(users);
+    } catch (error) {
+      console.error("Error al obtener usuario", error);
+      res.status(500).json({ message: "Error interno del servidor" });
+    }
+  },
+};
 
-    
-    return res.status(200).json({ success: true, data: users });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  } finally {
-  }
-}
+export default UserController;
