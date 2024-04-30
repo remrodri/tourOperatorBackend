@@ -1,20 +1,26 @@
 {
   "name": "touroperatorbackend",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "backend APIREST para la operadora de turismo",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/app.js"
   },
+  "author": "rembert rodrigo tucuman alarcon",
+  "license": "ISC",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "debug": "~2.6.9",
-    "express": "^4.18.2",
-    "mongodb": "^6.3.0",
-    "morgan": "~1.9.1",
-    "schema-inspector": "^2.1.0"
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.1.0"
   }
 }
