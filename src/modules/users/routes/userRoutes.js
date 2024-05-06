@@ -5,7 +5,7 @@ import AuthMiddleware from "../../../middlewares/AuthMiddleware.js";
 const router = express.Router();
 
 //rutas protegidas q requieren autorizacion
-router.get("/users", AuthMiddleware.verifyToken, UserController.getUsers, UserController.refreshToken); // GET /api/v1/users -> [User, User]
+router.get("/users"); // GET /api/v1/users -> [User, User]
 router.get("/user/:id", AuthMiddleware.verifyToken, UserController.getUserById, UserController.refreshToken);
 router.post(
   "/refresh-token",
