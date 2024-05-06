@@ -8,8 +8,8 @@ connectDB();
 const app = express();
 
 const cosrOptions = {
-  origin: "http://localhost:5173",
-  optionsSuccessStatus: 200 
+  origin: "https://thankful-sand-048b5c50f.5.azurestaticapps.net",
+  optionsSuccessStatus: 200,
 };
 app.use(cors(cosrOptions));
 const PORT = process.env.PORT || 3000;
